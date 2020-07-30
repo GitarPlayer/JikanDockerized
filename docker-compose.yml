@@ -13,7 +13,18 @@ services:
     networks:
       - default
     restart: always
-
+  scrapy:
+    build:
+      context: scrapy
+      dockerfile: Dockerfile
+    depends_on:
+      - jikan-redis
+      - jikan-rest-api
+    network_mode: host
+    restart: always
+    volumes:
+      - ./appdata:/appdata
+    command: sh -c 'scrapy crawl user_interactions -t jsonlines -o /appdata/user_interactions.jsonl'
   jikan-redis:
     image: redis
     restart: always
