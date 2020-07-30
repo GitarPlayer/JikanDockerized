@@ -24,7 +24,7 @@ services:
     restart: always
     volumes:
       - ./appdata:/appdata
-    command: sh -c 'scrapy crawl user_interactions -t jsonlines -o /appdata/user_interactions.jsonl'
+    command: sh -c 'scrapy crawl user_interactions -t jsonlines -o /appdata/user_interactions.jsonl -s JOBDIR=appdata/interactions-spider'
   jikan-redis:
     image: redis
     restart: always
